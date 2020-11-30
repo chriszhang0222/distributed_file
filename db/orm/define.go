@@ -18,6 +18,15 @@ type TableUser struct {
 	Status int
 }
 
+type TableUserFile struct {
+	UserName    string
+	FileHash    string
+	FileName    string
+	FileSize    int64
+	UploadAt    string
+	LastUpdated string
+}
+
 type ExecResult struct {
 	Suc bool `json:"suc"`
 	Code int  `json:"code"`
