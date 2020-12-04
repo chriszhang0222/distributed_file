@@ -13,7 +13,7 @@ var (
 
 var db *sql.DB
 
-func InitDBConn(){
+func init(){
 	db, _ = sql.Open("mysql", MYSQLSource)
 	db.SetMaxOpenConns(100)
 	err := db.Ping()

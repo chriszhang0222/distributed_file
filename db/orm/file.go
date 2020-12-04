@@ -35,9 +35,9 @@ func OnFileUploadFinished(filehash, filename string,
 	return
 }
 
-func GetFileMeta(filehash string)(res ExecResult){
+func GetFileMeta(filehash string)(res ExecResult, err error){
 	stmt, err := mydb.DBConn().Prepare(
-		"select file_sha1,file_addr,file_name,file_size from tbl_file \" +\n\t\t\t\"where file_sha1=? and status=1 limit 1")
+		"select file_sha1,file_addr,file_name,file_size from tbl_file where file_sha1=? and status=1 limit 1")
 	if err != nil{
 		log.Println(err.Error())
 		res.Suc = false

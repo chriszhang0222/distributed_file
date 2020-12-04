@@ -1,14 +1,14 @@
 package handler
 
 import (
-	"distributed_file/meta"
+	"distributed_file/file_service/meta"
 	"distributed_file/util"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"time"
-	"encoding/json"
 )
 import "io/ioutil"
 
@@ -47,7 +47,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request){
 		}
 		newFile.Seek(0,0)
 		filemeta.FileSha1 = util.FileSha1(newFile)
-		meta.UpdateFileMeta(filemeta)
+		meta.UpdateFileMetaDB(filemeta)
 		http.Redirect(w, r, "/file/upload/suc", http.StatusFound)
 
 	}
@@ -73,7 +73,11 @@ func GetFileMetaHandler(w http.ResponseWriter, r *http.Request){
 func DownloadHandler(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
 	fileHash := r.Form.Get("filehash")
-	fm := meta.GetFileMeta(fileHash)
+	fm, err := meta.GetFileMetaFromDB(fileHash)
+	if err != nil{
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	location := fm.Location
 	f, err := os.Open(location)
 	if err != nil{

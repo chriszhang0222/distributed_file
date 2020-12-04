@@ -2,7 +2,7 @@ package handler
 
 import (
 	"distributed_file/util"
-	"github.com/samtake/filestore-server/filestore-server-gin/db"
+	db "distributed_file/db/orm"
 	"net/http"
 )
 
@@ -25,8 +25,8 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	encPasswd := util.Sha1([]byte(passwd + pwdSalt))
-	suc := db.UserSignup(username, encPasswd)
-	if suc {
+	suc := db.UserSignUp(username, encPasswd)
+	if suc.Suc {
 		w.Write([]byte("success"))
 	}else{
 		w.Write([]byte("failed"))
@@ -41,8 +41,8 @@ func SignInHandler(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
 	username := r.Form.Get("username")
 	password := r.Form.Get("password")
-	encPasswd := util.Sha1([]byte(password+pwdSalt))
-	pwdChecked := db.UserSignin(username, encPasswd)
+	encPasswd := util.Sha1([]byte(password+ pwdSalt))
+	pwdChecked := db.UserSignin(username, encPasswd).Suc
 	if !pwdChecked{
 		w.Write([]byte("Failed"))
 		return

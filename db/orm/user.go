@@ -21,12 +21,12 @@ func UserSignUp(username, password string)(res ExecResult){
 		res.Msg = err.Error()
 		return
 	}
-	if rowsAffected, err := ret.RowsAffected();nil == err && rowsAffected > 0{
+	if rowsAffected, err := ret.RowsAffected();nil == err && rowsAffected >= 0{
 		res.Suc = true
 		return
 	}
 	res.Suc = false
-	res.Msg = "No data updated"
+	res.Msg = "User already exists"
 	return
 
 }

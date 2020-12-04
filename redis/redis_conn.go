@@ -11,6 +11,10 @@ var (
 	redisHost = "192.168.0.17:6379"
 )
 
+func init() {
+	pool = NewRedisPool()
+}
+
 func getConn()(redis.Conn, error){
 	c, err := redis.Dial("tcp", redisHost)
 	if err != nil{
