@@ -171,7 +171,7 @@ func TryFastUploadhandler(w http.ResponseWriter, r *http.Request){
 	if suc.Suc{
 		resp := util.RespMsg{
 			Code: 0,
-			Msg: "Dast Upload Succeed",
+			Msg: "Fast Upload Succeed",
 		}
 		w.Write(resp.JSONBytes())
 		return

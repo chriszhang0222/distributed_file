@@ -41,3 +41,7 @@ func NewRedisPool() *redis.Pool{
 	}
 }
 
+func RedisPool() *redis.Pool{
+	return pool
+}
+
