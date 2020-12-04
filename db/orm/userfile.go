@@ -47,7 +47,9 @@ func QueryUserFileMetas(username string, limit int64)(res ExecResult){
 	}
 	var userFiles []TableUserFile
 	for rows.Next(){
-		ufile := TableUserFile{}
+		ufile := TableUserFile{
+			UserName: username,
+		}
 		err = rows.Scan(
 			&ufile.FileHash,
 			&ufile.FileName,

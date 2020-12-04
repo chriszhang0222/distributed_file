@@ -51,8 +51,20 @@ func UploadHandler(w http.ResponseWriter, r *http.Request){
 		newFile.Seek(0,0)
 		filemeta.FileSha1 = util.FileSha1(newFile)
 		meta.UpdateFileMetaDB(filemeta)
-		http.Redirect(w, r, "/file/upload/suc", http.StatusFound)
 
+		//add into user_file table
+		r.ParseForm()
+		username := r.Form.Get("username")
+		if username == ""{
+			username = "default"
+		}
+		res := db.OnUserFileUploadFinished(username, filemeta.FileSha1, filemeta.FileName, filemeta.FileSize )
+		if res.Suc{
+			http.Redirect(w, r, "/static/view/home.html", http.StatusFound)
+			return
+		}else {
+			w.Write([]byte("upload failed"))
+		}
 	}
 
 }
@@ -193,6 +205,24 @@ func DownLoadURLHandler(w http.ResponseWriter, r *http.Request){
 	}else if strings.HasPrefix(tableData.FileAddr.String, "oss/"){
 		//TODO
 	}
+}
 
+func FileQueryHandler(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	limit, _ := strconv.Atoi(r.Form.Get("limit"))
+	username := r.Form.Get("username")
+	result := db.QueryUserFileMetas(username, int64(limit))
+	if !result.Suc{
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Println(result.Msg)
+		return
+	}
+	data := result.Data.([]db.TableUserFile)
+	resp := util.RespMsg{
+		Code: 0,
+		Msg: "OK",
+		Data: data,
+	}
+	w.Write(resp.JSONBytes())
 
 }

@@ -106,20 +106,20 @@
         if (!body) {
           return;
         }
-        var data = body;
+        var data = JSON.parse(body);
         if (!data || data.length <= 0) {
           return;
         }
 
         var dlHost = 'http://localhost:8080';
-        var dlEntry = localStorage.getItem('downloadEntry');
-        if (dlEntry != '') {
-          if (dlEntry.indexOf('http:')<0) {
-            dlHost = 'http://' + dlEntry;
-          } else {
-            dlHost = dlEntry;
-          }
-        }
+        // var dlEntry = localStorage.getItem('downloadEntry');
+        // if (dlEntry != '') {
+        //   if (dlEntry.indexOf('http:')<0) {
+        //     dlHost = 'http://' + dlEntry;
+        //   } else {
+        //     dlHost = dlEntry;
+        //   }
+        // }
         
         var downloadHtml = '<button class="btn btn-info" ' +
           'style="height:30px;margin:5px 3px;"' +
@@ -132,6 +132,7 @@
           'style="height:30px;margin:5px 3px;"' +
           'onClick = "cdlFile(\'' + dlHost + '/file/download?filehash={0}&{1}\')">断点下载(火狐)</button>';
 
+        data = data.data;
         for (var i = 0; i < data.length; i++) {
           var x = document.getElementById('filetbl').insertRow();
           var cell = x.insertCell();
