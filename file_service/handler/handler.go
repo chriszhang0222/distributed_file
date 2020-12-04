@@ -34,7 +34,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request){
 			UploadAt: time.Now().Format("2006-01-02 15:00:00"),
 		}
 
-		newFile, err := os.Create("/User/chris/tmp/" + head.Filename)
+		newFile, err := os.Create("/Users/chris/tmp/" + head.Filename)
 		if err != nil{
 			fmt.Println(err.Error())
 			return

@@ -61,3 +61,20 @@ func SignInHandler(w http.ResponseWriter, r *http.Request){
 	w.Write(resp.JSONBytes())
 
 }
+
+func UserInfoHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	username := r.Form.Get("username")
+	data := db.GetUserInfo(username)
+	if !data.Suc{
+		w.WriteHeader(http.StatusForbidden)
+		return
+	}
+	user := data.Data.(db.TableUser)
+	resp := util.RespMsg{
+		Code: 0,
+		Msg: "OK",
+		Data: user,
+	}
+	w.Write(resp.JSONBytes())
+}
