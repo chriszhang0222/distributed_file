@@ -26,18 +26,18 @@ func UpdateFileMetaDB(meta FileMeta) orm.ExecResult {
 func GetFileMeta(key string) FileMeta {
 	return fileMetas[key]
 }
-func GetFileMetaFromDB(key string)(FileMeta, error){
+func GetFileMetaFromDB(key string)(*FileMeta, error){
 	data, err := orm.GetFileMeta(key)
 	if data.Suc{
 		tableData := data.Data.(orm.TableFile)
-		return FileMeta{
+		return &FileMeta{
 			FileSha1: key,
 			FileName: tableData.FileName.String,
 			FileSize: tableData.FileSize.Int64,
 			Location: tableData.FileAddr.String,
 		}, nil
 	}
-	return FileMeta{}, err
+	return nil, err
 }
 func RemoveFileMeta(fileSha1 string){
 	delete(fileMetas, fileSha1)

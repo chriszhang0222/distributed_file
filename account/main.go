@@ -17,6 +17,7 @@ func main(){
 	http.HandleFunc("/user/signup", h1.SignUpHandler)
 	http.HandleFunc("/user/signin", h1.SignInHandler)
 	http.HandleFunc("/file/upload", h2.UploadHandler)
+	http.HandleFunc("/file/fastupload", h2.TryFastUploadhandler)
 	err := http.ListenAndServe(":7998", nil)
 	if err != nil{
 		fmt.Println(err.Error())

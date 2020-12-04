@@ -51,7 +51,7 @@ func GetFileMeta(filehash string)(res ExecResult, err error){
 	if err != nil {
 		if err == sql.ErrNoRows {
 			// 查不到对应记录， 返回参数及错误均为nil
-			res.Suc = true
+			res.Suc = false
 			res.Data = nil
 			return
 		} else {
