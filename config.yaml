@@ -1,0 +1,6 @@
+nacos:
+  host: '192.168.0.10'
+  port: 8848
+  namespace: '3c371602-3559-45a3-b08c-0206a05b6596'
+  dataId: 'config.json'
+  group: 'dev'

@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	MYSQLSource = "root:31415926@tcp(192.168.0.17:3306)/fileserver?charset=utf8"
+	MYSQLSource = "root:31415926@tcp(192.168.0.10:3306)/fileserver?charset=utf8"
 )
 
 var db *sql.DB

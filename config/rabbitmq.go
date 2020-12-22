@@ -10,5 +10,5 @@ const (
 )
 
 var (
-	RabbitURL = "amqp://admin:admin@192.168.0.17/my_vhost"
+	RabbitURL = "amqp://admin:admin@192.168.0.10/my_vhost"
 )

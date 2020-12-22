@@ -8,7 +8,7 @@ import (
 
 var (
 	pool *redis.Pool
-	redisHost = "192.168.0.17:6379"
+	redisHost = "192.168.0.10:6379"
 )
 
 func init() {
