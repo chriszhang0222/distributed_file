@@ -21,7 +21,7 @@ func UpdateFileMeta(meta FileMeta){
 	}
 }
 func UpdateFileMetaDB(meta FileMeta) orm.ExecResult {
-	return orm.OnFileUploadFinished(meta.FileSha1, meta.FileName, meta.FileSize, meta.UploadAt)
+	return orm.OnFileUploadFinished(meta.FileSha1, meta.FileName, meta.FileSize, meta.Location)
 }
 func GetFileMeta(key string) FileMeta {
 	return fileMetas[key]

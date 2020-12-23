@@ -122,3 +122,7 @@ func UploadPartHandler(w http.ResponseWriter, r *http.Request){
 	 db.OnUserFileUploadFinished(username, filehash, filename, int64(fsize))
 	 w.Write(util.NewRespMsg(0, "OK", nil).JSONBytes())
  }
+
+ func CancelUploadhandler(w http.ResponseWriter, r *http.Request){
+
+ }

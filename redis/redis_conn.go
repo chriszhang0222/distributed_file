@@ -7,16 +7,16 @@ import (
 )
 
 var (
-	pool *redis.Pool
-	redisHost = "192.168.0.10:6379"
+	Pool *redis.Pool
+	RedisHost = "192.168.0.10:6379"
 )
 
 func init() {
-	pool = NewRedisPool()
+	Pool = NewRedisPool()
 }
 
 func getConn()(redis.Conn, error){
-	c, err := redis.Dial("tcp", redisHost)
+	c, err := redis.Dial("tcp", RedisHost)
 	if err != nil{
 		fmt.Println(err)
 		return nil, err
@@ -42,6 +42,6 @@ func NewRedisPool() *redis.Pool{
 }
 
 func RedisPool() *redis.Pool{
-	return pool
+	return Pool
 }
 
