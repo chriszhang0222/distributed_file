@@ -27,7 +27,7 @@ type MultipartUploadInfo struct {
 }
 
 func getChuckSize(size int) int{
-	return int(math.Ceil(float64(size))) / chucksize
+	return int(math.Ceil(float64(size) / chucksize ))
 }
 
 func InitialMultipartUploadHandler(w http.ResponseWriter, r *http.Request){
@@ -37,6 +37,7 @@ func InitialMultipartUploadHandler(w http.ResponseWriter, r *http.Request){
 	filesize, err := strconv.Atoi(r.Form.Get("filesize"))
 	if err != nil{
 		w.Write(util.NewRespMsg(-1, "invalid parameters", nil).JSONBytes())
+		return
 	}
 	rConn := rPool.RedisPool().Get()
 	defer rConn.Close()
