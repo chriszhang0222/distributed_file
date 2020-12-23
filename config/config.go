@@ -37,4 +37,7 @@ type ServerConfig struct {
 	MySQL MySQLConfig `mapstructure:"mysql" json:"mysql"`
 	Redis RedisConfig `mapstructure:"redis" json:"redis"`
 	Rabbit RabbitConfig `mapstructure:"rabbit" json:"rabbit"`
+	UploadServicePort int `mapstructure:"uploadservice" json:"uploadservice"`
+	DownloadServicePort int `mapstructure:"downloadservice" json:"downloadservice"`
+
 }

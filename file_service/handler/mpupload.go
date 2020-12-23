@@ -64,7 +64,7 @@ func UploadPartHandler(w http.ResponseWriter, r *http.Request) {
 	rConn := rPool.RedisPool().Get()
 	defer rConn.Close()
 
-	fpath := "Users/chris/tmp/data/" + uploadId + "/" + chunkIndex
+	fpath := "/Users/chris/tmp/data/" + uploadId + "/" + chunkIndex
 	os.MkdirAll(path.Dir(fpath), 0744)
 	fd, err := os.Create(fpath)
 	if err != nil {
@@ -123,8 +123,4 @@ func CompleteUploadHandler(w http.ResponseWriter, r *http.Request) {
 	db.OnFileUploadFinished(filehash, filename, int64(fsize), "")
 	db.OnUserFileUploadFinished(username, filehash, filename, int64(fsize))
 	w.Write(util.NewRespMsg(0, "OK", nil).JSONBytes())
-}
-
-func CancelUploadhandler(w http.ResponseWriter, r *http.Request) {
-
 }
