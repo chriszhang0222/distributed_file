@@ -1,0 +1,18 @@
+{
+  "rabbitmq": {
+    "host": "192.168.0.10",
+    "port": 5672,
+    "vhost": "my_vhost"
+  },
+  "mysql": {
+    "host": "192.168.0.10",
+    "port": 3306,
+    "user": "root",
+    "password": 31415926,
+    "db": "fileserver"
+  },
+  "redis": {
+    "host": "192.168.0.10",
+    "port": 6379
+  }
+}
